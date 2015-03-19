@@ -7,6 +7,8 @@
 </head>
 <body>
 <header>My Friendship Bracelets</header>
-<img src='{% static 'pics/zigzag.jpg' %}' alt="" style="width: 417px;height: 212px"/>
+<!-- <img src={% static 'zigzag.jpg' %} alt="" style="width: 417px;height: 212px"/> -->
+<p> {{ bracelet_pbjects.name }}</p>
+<img src={{ bracelet_objects.picture.url }} alt=""/>
 </body>
 </html>

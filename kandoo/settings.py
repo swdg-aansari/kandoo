@@ -83,8 +83,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-"""MEDIA_ROOT = 'templates/pics/'
-MEDIA_URL = 'http://127.0.0.1:8000/pics/'"""
+MEDIA_ROOT = 'dastband/static/'
+MEDIA_URL = 'http://127.0.0.1:8000/static/'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
