@@ -6,3 +6,4 @@ from dastband.models import FriendshipBracelet
 def home(request):
     #bracelets = FriendshipBracelet.objects.get(name = ObjectName)
     return render(request,'home.html')
+
