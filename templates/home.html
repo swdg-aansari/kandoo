@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -6,6 +7,6 @@
 </head>
 <body>
 <header>My Friendship Bracelets</header>
-<img src='pics/zigzag.jpg' alt="" style="width: 417px;height: 212px"/>
+<img src='{% static 'pics/zigzag.jpg' %}' alt="" style="width: 417px;height: 212px"/>
 </body>
 </html>
