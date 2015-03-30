@@ -13,10 +13,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FriendshipBracelet',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID', serialize=False, primary_key=True)),
                 ('name', models.CharField(max_length=20)),
-                ('location', models.CharField(max_length=100)),
                 ('price', models.IntegerField()),
+                ('picture', models.ImageField(default='static/picture.jpg', upload_to='')),
             ],
             options={
             },

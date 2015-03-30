@@ -7,8 +7,11 @@
 </head>
 <body>
 <header>My Friendship Bracelets</header>
-<!-- <img src={% static 'zigzag.jpg' %} alt="" style="width: 417px;height: 212px"/> -->
-<p> {{ bracelet_pbjects.name }}</p>
-<img src={{ bracelet_objects.picture.url }} alt=""/>
+<form role="checkbox" method="post">
+    {% csrf_token %}
+    <input type="checkbox" name="test" value="Test"> my BTN <br>
+    <input type="checkbox" name="test" value="Test2"> my BTN 2<br>
+    <input type="submit" value="OK">
+</form>
 </body>
 </html>
