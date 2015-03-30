@@ -12,6 +12,7 @@ def home(request):
     print(client.name)
     if request.method == 'POST':
         selected_bracelets = request.POST.getlist('test')
+
         # for obj in selected_bracelets:
         #     client.bracelets.add(obj)
 
