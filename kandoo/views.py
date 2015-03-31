@@ -1,21 +1,39 @@
 __author__ = 'ali'
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render, redirect
 from client.models import Client
-
 from dastband.models import FriendshipBracelet
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.views.generic import CreateView
+from django.core.urlresolvers import reverse_lazy
+from django.contrib.auth import login
 
 
 def home(request):
     bracelets = FriendshipBracelet.objects.all()
-    client = Client.objects.get(name='sade')
-    print(client.name)
+    auth_form = AuthenticationForm(request)
+
     if request.method == 'POST':
-        selected_bracelets = request.POST.getlist('test')
+        if request.user.is_authenticated():
+            print("hhhd")
+            us = request.user
+            client = Client.objects.get(user=us)
+            selected_bracelets = request.POST.getlist('test')
+            for obj in selected_bracelets:
+                brc = FriendshipBracelet.objects.get(name=obj)
+                client.bracelets.add(brc)
+        else:
+            print('nnn')
+            form = AuthenticationForm(request, data=request.POST)
+            if form.is_valid():
+                login(request, form.get_user())
 
-        # for obj in selected_bracelets:
-        #     client.bracelets.add(obj)
+    return render(request, 'home.html', {'form': auth_form})
 
-    return render_to_response('home.html', context_instance=RequestContext(request))
+
+class SignUpView(CreateView):
+    form_class = UserCreationForm
+    template_name = 'create_account.html'
+    success_url = reverse_lazy('home')
+
 
 

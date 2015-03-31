@@ -7,11 +7,25 @@
 </head>
 <body>
 <header>My Friendship Bracelets</header>
-<form role="checkbox" method="post">
-    {% csrf_token %}
-    <input type="checkbox" name="test" value="Test"> my BTN <br>
-    <input type="checkbox" name="test" value="Test2"> my BTN 2<br>
-    <input type="submit" value="OK">
-</form>
+{% if user.is_authenticated %}
+    <p> hello {{ user.username }}</p>
+    <form role="checkbox" method="post">
+        {% csrf_token %}
+        <input type="checkbox" name="test" value="sade"> my BTN <br>
+        <input type="checkbox" name="test" value="sade2"> my BTN 2<br>
+        <input type="submit" value="OK">
+    </form>
+    <a href="{% url 'log_out' %}"> Exit </a>
+{% else %}
+    <p> Enter</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Enter">
+    </form>
+    <p> Or Create a New Account</p>
+    <a href="{% url 'create_account' %}"> sign up</a>
+
+{% endif %}
 </body>
 </html>
