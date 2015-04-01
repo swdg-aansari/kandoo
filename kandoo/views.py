@@ -40,9 +40,7 @@ def user_creation(request):
         reg_form = RegForm(data=request.POST)
         if reg_form.is_valid():
             user = reg_form.save()
-            client = Client.objects.create(user=user)
-            client.name = reg_form.name
-            client.save()
+            Client.objects.create(user=user, name=reg_form.cleaned_data['name'])
             return redirect('home')
     else:
         reg_form = RegForm()
