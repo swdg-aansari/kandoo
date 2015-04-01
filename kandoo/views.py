@@ -6,6 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.views.generic import CreateView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth import login
+from User.forms import RegForm
 
 
 def home(request):
@@ -14,7 +15,6 @@ def home(request):
 
     if request.method == 'POST':
         if request.user.is_authenticated():
-            print("hhhd")
             us = request.user
             client = Client.objects.get(user=us)
             selected_bracelets = request.POST.getlist('test')
@@ -22,7 +22,6 @@ def home(request):
                 brc = FriendshipBracelet.objects.get(name=obj)
                 client.bracelets.add(brc)
         else:
-            print('nnn')
             form = AuthenticationForm(request, data=request.POST)
             if form.is_valid():
                 login(request, form.get_user())
@@ -36,4 +35,14 @@ class SignUpView(CreateView):
     success_url = reverse_lazy('home')
 
 
-
+def user_creation(request):
+    if request.method == 'POST':
+        reg_form = RegForm(data=request.POST)
+        if reg_form.is_valid():
+            user = reg_form.save()
+            client = Client.objects.create(user=user, name=reg_form.name)
+            client.save()
+            return redirect('home')
+    else:
+        reg_form = RegForm()
+    return render(request, 'create_account.html', {'form': reg_form})
