@@ -11,9 +11,17 @@
     <p> hello {{ user.username }}</p>
     <form role="checkbox" method="post">
         {% csrf_token %}
-        <input type="checkbox" name="test" value="sade"> my BTN <br>
-        <input type="checkbox" name="test" value="sade2"> my BTN 2<br>
+{#        <input type="checkbox" name="test" value="sade"> my BTN <br>#}
+{#        <input type="checkbox" name="test" value="sade2"> my BTN 2<br>#}
+{#        <input type="submit" value="OK">#}
+
+        {% for obj in brc %}
+            <input type="checkbox" name="bracelets" value={{obj.name}} /> name: {{obj.name}} & price: {{obj.price}} Toman <img src={{ obj.picture.url }} alt="" width="200px" height="150px"/>
+            <br/>
+        {% endfor %}
+        <br/>
         <input type="submit" value="OK">
+
     </form>
     <a href="{% url 'log_out' %}"> Exit </a>
 {% else %}

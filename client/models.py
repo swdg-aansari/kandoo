@@ -6,4 +6,4 @@ from dastband.models import FriendshipBracelet
 class Client(models.Model):
     name = models.CharField(max_length=20)
     user = models.OneToOneField(User)
-    bracelets = models.ManyToManyField(FriendshipBracelet, blank=True)
+    bracelets = models.ManyToManyField(FriendshipBracelet, blank=True   )

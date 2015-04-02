@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>User Page</title>
+</head>
+<body>
+<h1>Your Selected Bracelets:</h1>
+<ul>
+    {% for obj in client %}
+        <li>{{ obj.name }}</li>
+    {% endfor %}
+</ul>
+total price = {{ price }}
+</body>
+</html>

@@ -17,16 +17,17 @@ def home(request):
         if request.user.is_authenticated():
             us = request.user
             client = Client.objects.get(user=us)
-            selected_bracelets = request.POST.getlist('test')
+            selected_bracelets = request.POST.getlist('bracelets')
             for obj in selected_bracelets:
                 brc = FriendshipBracelet.objects.get(name=obj)
                 client.bracelets.add(brc)
+            return redirect('user_page')
         else:
             form = AuthenticationForm(request, data=request.POST)
             if form.is_valid():
                 login(request, form.get_user())
 
-    return render(request, 'home.html', {'form': auth_form})
+    return render(request, 'home.html', {'form': auth_form, 'brc': bracelets})
 
 
 class SignUpView(CreateView):
@@ -45,3 +46,12 @@ def user_creation(request):
     else:
         reg_form = RegForm()
     return render(request, 'create_account.html', {'form': reg_form})
+
+
+def user_page(request):
+    us = request.user
+    client = Client.objects.get(user=us)
+    price = 0
+    for obj in client.bracelets.all():
+        price += obj.price
+    return render(request, 'user_page.html', {'client': client.bracelets.all(), 'price': price})
